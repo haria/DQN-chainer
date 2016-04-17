@@ -300,6 +300,10 @@ class dqn_agent(Agent):  # RL-glue Process
             with open('dqn_model.dat', 'w') as f:
                 pickle.dump(self.DQN.model, f)
             return "message understood, model saved"
+        if inMessage.startswith("load model"):
+            with open('dqn_model.dat', 'r') as f:
+                self.DQN.model = pickle.load(f)
+            return "message understood, model loaded"
 
 if __name__ == "__main__":
     AgentLoader.loadAgent(dqn_agent())
